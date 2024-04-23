@@ -1,4 +1,4 @@
-public class LibrarySystem {
+/*public class LibrarySystem {
 	// 변수 정의
 	
 	// 생성자 정
@@ -72,6 +72,78 @@ public class LibrarySystem {
         */
     
         // 도움을 위해 Cart.java의 printBookList()를 참조하세요
-    }
 
+//LibrarySystem.java
+public class LibrarySystem {
+ private Book[] booklist;
+ private static int bookCount = 0;
+ private static final int NUM_BOOK = 10;
+
+ public LibrarySystem() {
+     this.booklist = new Book[NUM_BOOK];
+ }
+
+ public void addBook(Book book) {
+     if (bookCount < NUM_BOOK) {
+         booklist[bookCount++] = book;
+     } else {
+         System.out.println("Library is full. Cannot add more books.");
+     }
+ }
+
+ public void removeBook(String title) {
+     for (int i = 0; i < bookCount; i++) {
+         if (booklist[i].getTitle().equals(title)) {
+             // Shift books to fill the gap
+             for (int j = i; j < bookCount - 1; j++) {
+                 booklist[j] = booklist[j + 1];
+             }
+             booklist[--bookCount] = null;
+             System.out.println("Book '" + title + "' removed from the library.");
+             return;
+         }
+     }
+     System.out.println("Book '" + title + "' not found in the library.");
+ }
+
+ public void borrowBook(String title) {
+     for (int i = 0; i < bookCount; i++) {
+         if (booklist[i].getTitle().equals(title)) {
+             if (booklist[i].isAvailable()) {
+                 booklist[i].setAvailable(false);
+                 System.out.println("Book '" + title + "' borrowed successfully.");
+             } else {
+                 System.out.println("Book '" + title + "' is already borrowed.");
+             }
+             return;
+         }
+     }
+     System.out.println("Book '" + title + "' not found in the library.");
+ }
+
+ public void returnBook(String title) {
+     for (int i = 0; i < bookCount; i++) {
+         if (booklist[i].getTitle().equals(title)) {
+             if (!booklist[i].isAvailable()) {
+                 booklist[i].setAvailable(true);
+                 System.out.println("Book '" + title + "' returned successfully.");
+             } else {
+                 System.out.println("Book '" + title + "' is not borrowed.");
+             }
+             return;
+         }
+     }
+     System.out.println("Book '" + title + "' not found in the library.");
+ }
+
+ public void displayBooks() {
+     System.out.println("Books in the library:");
+     for (int i = 0; i < bookCount; i++) {
+         System.out.print(booklist[i].getIsbn() + " | ");
+         System.out.print(booklist[i].getTitle() + " | ");
+         System.out.print(booklist[i].getAuthor() + " | ");
+         System.out.print(booklist[i].getYear() + " | ");
+         System.out.println(booklist[i].isAvailable() ? "Available" : "Out");
+     }
+ }
 }

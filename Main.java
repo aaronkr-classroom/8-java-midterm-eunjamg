@@ -1,4 +1,4 @@
-public class Main {
+/*public class Main {
 
 	public static void main(String[] args) {
 		// 새 LibrarySystem 개체 만들기
@@ -36,4 +36,31 @@ public class Main {
 		ls.displayAllBooks();
 	}
 
+}*/
+// Main.java
+public class Main {
+    public static void main(String[] args) {
+        LibrarySystem library = new LibrarySystem();
+
+        // Adding books to the library
+        library.addBook(new LibraryBook("ISBN1234", "JSP 웹 프로그래밍", "송미영", 2018));
+        library.addBook(new LibraryBook("ISBN1235", "안드로이드 프로그래밍", "우재남", 2022));
+
+        // Displaying all books in the library
+        library.displayBooks();
+
+        // Borrowing a book
+        library.borrowBook("JSP 웹 프로그래밍");
+        library.borrowBook("안드로이드 프로그래밍");
+
+        // Displaying all books in the library after borrowing
+        library.displayBooks();
+
+        // Returning a book
+        library.returnBook("JSP 웹 프로그래밍");
+
+        // Displaying all books in the library after returning
+        library.displayBooks();
+    }
 }
+
